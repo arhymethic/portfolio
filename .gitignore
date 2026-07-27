@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.log
+
+# Runtime-generated data — not committed
+data/contacts.json
+data/vectors/
+public/avatars/

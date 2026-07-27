@@ -1,0 +1,248 @@
+{
+  "_comment": "This is the SINGLE source of truth. Every visible colour, string, and copy on the site lives here. Restart the server after changes.",
+  "name": "Rhythm",
+  "initials": "R",
+  "tagline": "Cybersecurity Enthusiast, Linux User, Electronics Hobbyist",
+  "photo": "",
+  "_photo_comment": "Path relative to /public (e.g. 'images/me.jpg'). Leave empty to show initials avatar.",
+  "whatsapp": {
+    "number": "916350465638",
+    "_number_comment": "Country code + digits, no + or spaces. E.g. 447911123456",
+    "message": "Hey Rhythm, I tapped your card. Keen to connect!"
+  },
+  "socials": {
+    "Instagram": "https://www.instagram.com/arhymethic/",
+    "linkedin": "",
+    "github": "https://github.com/arhymethic",
+    "twitter": "",
+    "email": ""
+  },
+  "meta": {
+    "title": "",
+    "_title_comment": "Browser tab title. Leave empty to auto-generate as 'name@portfolio:~'",
+    "description": "The personal portfolio of Rhythm."
+  },
+  "server": {
+    "port": 3000
+  },
+  "theme": {
+    "_comment": "All CSS custom properties. Change a colour here and it updates everywhere instantly.",
+    "colors": {
+      "--bg": "#11111b",
+      "--bg-term": "#1e1e2e",
+      "--bg-surface": "#181825",
+      "--bg-titlebar": "#11111b",
+      "--green": "#cba6f7",
+      "--green-glow": "rgba(203, 166, 247, 0.6)",
+      "--green-dim": "#b4befe",
+      "--green-dark": "#89b4fa",
+      "--green-muted": "rgba(203, 166, 247, 0.25)",
+      "--cyan": "#89dceb",
+      "--cyan-dim": "rgba(137, 220, 235, 0.7)",
+      "--red": "#f38ba8",
+      "--yellow": "#f9e2af",
+      "--text": "#cdd6f4",
+      "--text-dim": "#bac2de",
+      "--text-muted": "#7f849c",
+      "--text-comment": "#6c7086",
+      "--border": "#313244",
+      "--border-bright": "#45475a"
+    },
+    "dots": {
+      "_comment": "The three traffic-light dots on the terminal title bar.",
+      "red": "#f38ba8",
+      "yellow": "#f9e2af",
+      "green": "#a6e3a1"
+    }
+  },
+  "ui": {
+    "_comment": "Every visible string on the site. No more hunting through source files.",
+    "boot": {
+      "logo": [
+        "██████╗ ██╗  ██╗██╗   ██╗████████╗██╗  ██╗███╗   ███╗",
+        "██╔══██╗██║  ██║╚██╗ ██╔╝╚══██╔══╝██║  ██║████╗ ████║",
+        "██████╔╝███████║ ╚████╔╝    ██║   ███████║██╔████╔██║",
+        "██╔══██╗██╔══██║  ╚██╔╝     ██║   ██╔══██║██║╚██╔╝██║",
+        "██║  ██║██║  ██║   ██║      ██║   ██║  ██║██║ ╚═╝ ██║",
+        "╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚═╝  ╚═╝╚═╝     ╚═╝"
+      ],
+      "lines": [
+        {
+          "text": "BIOS v2.4.1 — POST check passed",
+          "status": "ok",
+          "delay": 60
+        },
+        {
+          "text": "CPU: 8-core @ 3.6GHz — OK",
+          "status": "ok",
+          "delay": 80
+        },
+        {
+          "text": "RAM: 32768MB — OK",
+          "status": "ok",
+          "delay": 80
+        },
+        {
+          "text": "Loading kernel modules...",
+          "status": "info",
+          "delay": 120
+        },
+        {
+          "text": "Mounting filesystems — OK",
+          "status": "ok",
+          "delay": 80
+        },
+        {
+          "text": "Starting network interfaces — OK",
+          "status": "ok",
+          "delay": 80
+        },
+        {
+          "text": "Initializing portfolio.service...",
+          "status": "info",
+          "delay": 150
+        },
+        {
+          "text": "Loading config.json — OK",
+          "status": "ok",
+          "delay": 80
+        },
+        {
+          "text": "Establishing encrypted tunnel (TLSv1.3)...",
+          "status": "info",
+          "delay": 200
+        },
+        {
+          "text": "Connection secured — AES-256-GCM — OK",
+          "status": "ok",
+          "delay": 100
+        },
+        {
+          "text": "Verifying package integrity — OK",
+          "status": "ok",
+          "delay": 80
+        },
+        {
+          "text": "portfolio.service: active (running)",
+          "status": "ok",
+          "delay": 80
+        }
+      ],
+      "statusLabels": {
+        "ok": "[  OK  ]",
+        "info": "[ INFO ]",
+        "warn": "[ WARN ]",
+        "err": "[ FAIL ]"
+      },
+      "readyText": "─── SYSTEM READY ───",
+      "pressAnyKey": "Press any key or scroll to continue_",
+      "autoDismissMs": 2000
+    },
+    "nav": {
+      "titleFormat": "{name}@portfolio:~",
+      "cta": "[ ./connect.sh ]"
+    },
+    "hero": {
+      "command": "whoami",
+      "commandFlag": "--verbose",
+      "gidGroup": "portfolio",
+      "extraGroups": "sudo,developers"
+    },
+    "projects": {
+      "command": "ls -la",
+      "commandArg": "~/projects/",
+      "permissions": "drwxr-xr-x",
+      "arrowChar": "→"
+    },
+    "connect": {
+      "command": "./connect.sh",
+      "commandFlag": "--via-whatsapp",
+      "buttonIcon": "▶",
+      "buttonText": "INITIATE SECURE CONNECTION"
+    },
+    "socials": {
+      "command": "cat",
+      "commandArg": "~/.social_links",
+      "keys": {
+        "linkedin": "LINKEDIN",
+        "github": "GITHUB",
+        "twitter": "TWITTER",
+        "email": "EMAIL"
+      }
+    },
+    "footer": {
+      "copy": "// tap NFC → open terminal → stay connected",
+      "cursorChar": "|"
+    },
+    "modal": {
+      "title": "SECURE_HANDSHAKE.sh — encrypted connection",
+      "closeChar": "✕",
+      "logLines": [
+        {
+          "text": "Encrypted tunnel established (TLSv1.3)",
+          "status": "ok"
+        },
+        {
+          "text": "Identity verification required",
+          "status": "ok"
+        },
+        {
+          "text": "Enter credentials to proceed:",
+          "status": "prompt"
+        }
+      ],
+      "fields": {
+        "name": {
+          "label": "NAME",
+          "placeholder": "\"Your Full name\"",
+          "error": "// NAME is required"
+        },
+        "email": {
+          "label": "EMAIL",
+          "placeholder": "\"you@company.com\""
+        },
+        "instagram": {
+          "label": "INSTAGRAM",
+          "placeholder": "\"username (no @)\""
+        },
+        "linkedin": {
+          "label": "LINKEDIN",
+          "placeholder": "\"username (no URL needed)\""
+        },
+        "role": {
+          "label": "ROLE",
+          "placeholder": "\"Musician | Engineer | Prime Minister Of India\""
+        },
+        "whereMet": {
+          "label": "WHERE_MET",
+          "placeholder": "\"Event name, city, or context\""
+        }
+      },
+      "submitCommand": "./execute.sh",
+      "submitFlag": "--send-to-whatsapp",
+      "loadingText": "[ processing... ]",
+      "formNote": "// Only NAME is required. All other fields improve enrichment quality.",
+      "success": {
+        "lines": [
+          {
+            "text": "Identity captured",
+            "status": "ok"
+          },
+          {
+            "text": "Handshake complete",
+            "status": "ok"
+          },
+          {
+            "text": "Opening WhatsApp tunnel...",
+            "status": "info"
+          }
+        ],
+        "message": "// Message incoming. Check WhatsApp.",
+        "note": "Connection will close automatically."
+      }
+    },
+    "errors": {
+      "submitFailed": "// ERROR: Submission failed. Please retry."
+    }
+  }
+}

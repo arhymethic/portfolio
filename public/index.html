@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title id="page-title">portfolio</title>
+<meta name="description" id="page-description" content="Personal portfolio" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="scanlines" aria-hidden="true"></div>
+<div id="boot-screen" class="boot-screen">
+<div class="boot-inner">
+<div class="boot-logo" aria-hidden="true">
+<pre id="boot-logo"></pre>
+</div>
+<div class="boot-log" id="boot-log"></div>
+<div class="boot-ready hidden" id="boot-ready">
+<span class="boot-ready-text" id="boot-ready-text"></span>
+<span class="blink-text" id="boot-press-key"></span>
+</div>
+</div>
+</div>
+<div id="main-content" class="hidden">
+<div class="term-window">
+<div class="term-titlebar" id="main-nav">
+<div class="term-dots" aria-hidden="true">
+<span class="dot dot-r" id="dot-r"></span>
+<span class="dot dot-y" id="dot-y"></span>
+<span class="dot dot-g" id="dot-g"></span>
+</div>
+<span class="term-title" id="nav-name"></span>
+<button class="term-nav-cta" id="nav-cta"></button>
+</div>
+<div class="term-body">
+<section class="cmd-block">
+<div class="prompt-line">
+<span class="prompt-user" id="prompt-user"></span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-path">:~</span><span class="prompt-sym">$</span>
+<span class="cmd-text" id="hero-cmd"></span>
+</div>
+<div class="cmd-output hero-output">
+<div class="hero-identity">
+<div class="avatar-block" id="avatar-wrap">
+<img id="avatar-img" class="avatar-img hidden" alt="Profile photo" />
+<div id="avatar-initials" class="avatar-initials"></div>
+</div>
+<div class="hero-text">
+<h1 id="hero-name" class="hero-name"></h1>
+<p id="hero-tagline" class="hero-tagline">
+<span id="tagline-text"></span>
+</p>
+<div class="hero-meta" id="hero-meta"></div>
+</div>
+</div>
+</div>
+</section>
+<section class="cmd-block">
+<div class="prompt-line">
+<span class="prompt-user" id="prompt-user-2"></span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-path">:~</span><span class="prompt-sym">$</span>
+<span class="cmd-text" id="projects-cmd"></span>
+</div>
+<div class="cmd-output">
+<div class="ls-header">total <span id="ls-total">0</span></div>
+<div class="projects-grid" id="projects-grid"></div>
+</div>
+</section>
+<section class="cmd-block">
+<div class="prompt-line">
+<span class="prompt-user" id="prompt-user-3"></span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-path">:~</span><span class="prompt-sym">$</span>
+<span class="cmd-text" id="connect-cmd"></span>
+</div>
+<div class="cmd-output">
+<button class="connect-btn" id="hero-cta-btn">
+<span class="connect-btn-bracket">[</span>
+<span class="connect-btn-icon" id="connect-btn-icon"></span>
+<span id="connect-btn-text"></span>
+<span class="connect-btn-bracket">]</span>
+</button>
+</div>
+</section>
+<section class="cmd-block">
+<div class="prompt-line">
+<span class="prompt-user" id="prompt-user-4"></span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-path">:~</span><span class="prompt-sym">$</span>
+<span class="cmd-text" id="socials-cmd"></span>
+</div>
+<div class="cmd-output">
+<div class="socials-list" id="footer-socials"></div>
+</div>
+</section>
+<footer class="term-footer">
+<div class="prompt-line">
+<span class="prompt-user" id="prompt-user-5"></span><span class="prompt-at">@</span><span class="prompt-host">portfolio</span><span class="prompt-path">:~</span><span class="prompt-sym">$</span>
+<span class="cursor-blink footer-cursor" id="footer-cursor"></span>
+</div>
+<p class="footer-copy" id="footer-copy"></p>
+</footer>
+</div>
+</div>
+</div>
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+<div class="modal-term" id="modal-panel">
+<div class="modal-titlebar">
+<div class="term-dots" aria-hidden="true">
+<span class="dot dot-r" id="modal-dot-r"></span>
+<span class="dot dot-y" id="modal-dot-y"></span>
+<span class="dot dot-g" id="modal-dot-g"></span>
+</div>
+<span id="modal-title"></span>
+<button class="modal-close-btn" id="modal-close"></button>
+</div>
+<div class="modal-body"></div>
+</div>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
