@@ -54,11 +54,13 @@ app.use((_req, res, next) => {
   next();
 });
 
-// Serve downloaded avatars from data/avatars/ at /avatars/
+// Serve downloaded avatars from data/avatars/ at /avatars/ and /data/avatars/
 app.use('/avatars', express.static(path.join(__dirname, 'data', 'avatars'), { etag: false, lastModified: false }));
+app.use('/data/avatars', express.static(path.join(__dirname, 'data', 'avatars'), { etag: false, lastModified: false }));
 
-// Serve project showcase images from data/projects/ at /project-images/
+// Serve project showcase images from data/projects/ at /project-images/ and /data/projects/
 app.use('/project-images', express.static(path.join(__dirname, 'data', 'projects'), { etag: false, lastModified: false }));
+app.use('/data/projects', express.static(path.join(__dirname, 'data', 'projects'), { etag: false, lastModified: false }));
 
 const serveStatic = express.static(path.join(__dirname, 'public'), { etag: false, lastModified: false });
 app.use((req, res, next) => {

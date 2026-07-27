@@ -118,36 +118,73 @@ var tags = project.tags || [];
 for (var t = 0; t < tags.length; t++) {
 tagsHtml += '<span class="project-tag">' + safeText(tags[t]) + '</span>';
 }
-var projImages = Array.isArray(project.images) && project.images.length > 0 ? project.images : [];
+var projImagesRaw = Array.isArray(project.images) && project.images.length > 0 ? project.images : [];
+var projImages = [];
+for (var im = 0; im < projImagesRaw.length; im++) {
+var norm = normalizeImgSrc(projImagesRaw[im]);
+if (norm) projImages.push(norm);
+}
 var card = document.createElement('div');
 card.className = 'project-card';
 card.setAttribute('tabindex', '0');
+
+var frameHtml = '';
+if (projImages.length > 0) {
+frameHtml =
+'<div class="project-frame">' +
+'<div class="project-frame-bar">' +
+'<span class="project-frame-tag">[STATIC_FRAME: MEDIA_ATTACHMENT]</span>' +
+'<span class="project-frame-zoom">⛶ EXPAND</span>' +
+'</div>' +
+'<div class="project-frame-viewport">' +
+'<img class="project-frame-img" src="' + projImages[0] + '" alt="' + safeText(project.title) + '" loading="lazy" />' +
+'</div>' +
+(projImages.length > 1 ? '<div class="project-frame-strip"></div>' : '') +
+'</div>';
+}
+
 card.innerHTML =
 '<div class="project-header">' +
 '<span class="project-perms">' + safeText(perms) + '</span>' +
 '<span class="project-name">' + safeText(slug) + '/</span>' +
 '</div>' +
-(projImages.length > 0 ? '<div class="project-images"></div>' : '') +
+frameHtml +
 '<div class="project-desc">' + safeText(project.description) + '</div>' +
 (tagsHtml ? '<div class="project-tags">' + tagsHtml + '</div>' : '') +
 '<span class="project-arrow">' + safeText(arrow) + '</span>';
+
 if (projImages.length > 0) {
-var imgStrip = card.querySelector('.project-images');
-for (var img = 0; img < projImages.length; img++) {
-var thumb = document.createElement('img');
-thumb.className = 'project-thumb';
-thumb.src = projImages[img];
-thumb.alt = project.title + ' — image ' + (img + 1);
-thumb.loading = 'lazy';
-(function(imgs, idx) {
-thumb.addEventListener('click', function(e) {
+var frameEl = card.querySelector('.project-frame');
+if (frameEl) {
+(function(imgs) {
+frameEl.addEventListener('click', function(e) {
 e.stopPropagation();
-openLightbox(imgs, idx);
+openLightbox(imgs, 0);
 });
-})(projImages, img);
-imgStrip.appendChild(thumb);
+})(projImages);
+}
+
+if (projImages.length > 1) {
+var stripEl = card.querySelector('.project-frame-strip');
+for (var sIdx = 0; sIdx < projImages.length; sIdx++) {
+var stripImg = document.createElement('img');
+stripImg.className = 'project-strip-thumb' + (sIdx === 0 ? ' active' : '');
+stripImg.src = projImages[sIdx];
+stripImg.alt = project.title + ' preview ' + (sIdx + 1);
+(function(imgs, idx, container, mainImg) {
+stripImg.addEventListener('click', function(e) {
+e.stopPropagation();
+if (mainImg) mainImg.src = imgs[idx];
+var allStrips = container.querySelectorAll('.project-strip-thumb');
+for (var k = 0; k < allStrips.length; k++) allStrips[k].classList.remove('active');
+this.classList.add('active');
+});
+})(projImages, sIdx, stripEl, card.querySelector('.project-frame-img'));
+stripEl.appendChild(stripImg);
 }
 }
+}
+
 if (project.url) {
 card.addEventListener('click', openUrl(project.url));
 card.addEventListener('keydown', function(url) {
@@ -406,6 +443,13 @@ if (titleEl) titleEl.textContent = 'image_viewer.sh [' + (_lbIdx + 1) + '/' + _l
 var multi = _lbImages.length > 1;
 if (prevBtn) prevBtn.style.display = multi ? '' : 'none';
 if (nextBtn) nextBtn.style.display = multi ? '' : 'none';
+}
+function normalizeImgSrc(src) {
+if (!src || typeof src !== 'string') return '';
+src = src.trim();
+if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('data:')) return src;
+if (!src.startsWith('/')) src = '/' + src;
+return src;
 }
 function setText(id, text) {
 var el = document.getElementById(id);

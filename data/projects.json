@@ -2,22 +2,39 @@
   {
     "title": "BARD — Quadruped Robot Dog",
     "description": "BARD is a custom quadruped robot dog built with 12 degrees of freedom, taking inspiration from Boston Dynamics SPOT. Capable of walking, running, and jumping.",
-    "tags": ["C++", "Hardware", "Robotics"]
+    "tags": [
+      "C++",
+      "Hardware",
+      "Robotics"
+    ]
   },
   {
     "title": "ESP32 Smart Watch with Navigation",
     "description": "My custom ESP32 smartwatch/deskbot with programmed emotions that can also work as a wrist-mounted navigation system.",
-    "tags": ["ESP32", "Navigation", "DeskBot"]
+    "tags": [
+      "ESP32",
+      "Navigation",
+      "DeskBot"
+    ]
   },
   {
     "title": "Custom Musical Instruments",
     "description": "A custom wired dual-humbucker bass guitar, a custom pickguard with switch configuration for my Fender Squier, and my own hollowbody guitar (still in progress).",
-    "tags": ["Music", "Electronics"]
+    "tags": [
+      "Music",
+      "Electronics"
+    ]
   },
   {
-    "title": "Wall-Mounted Home Server",
+    "title": "Home Server",
     "description": "Stripped an old laptop down to its board and drives, bolted it to a custom laptop cooling stand, and fixed the whole thing to the wall. Runs 24/7 — self-hosts this portfolio, file storage, media, and whatever else I throw at it.",
-    "tags": ["Linux", "Self-Hosted", "Hardware"],
-    "images": []
+    "tags": [
+      "Linux",
+      "Self-Hosted",
+      "Hardware"
+    ],
+    "images": [
+      "data/projects/server.jpg"
+    ]
   }
 ]
