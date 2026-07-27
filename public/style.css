@@ -408,6 +408,14 @@ pre {
   flex-shrink: 0;
   align-self: stretch;
   box-shadow: 0 0 16px var(--green-muted), inset 0 0 12px var(--border);
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+.avatar-block:hover {
+  transform: scale(1.03);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-md);
 }
 
 .avatar-img {
