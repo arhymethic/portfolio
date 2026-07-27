@@ -3,7 +3,7 @@
   "name": "Rhythm",
   "initials": "R",
   "tagline": "Cybersecurity Enthusiast, Linux User, Electronics Hobbyist",
-  "photo": "",
+  "photo": "images/profile.jpg",
   "_photo_comment": "Path relative to /public (e.g. 'images/me.jpg'). Leave empty to show initials avatar.",
   "whatsapp": {
     "number": "916350465638",

@@ -74,7 +74,9 @@ heroCmd.innerHTML = safeText(cmd) + ' <span class="cmd-flag">' + safeText(flag) 
 var avatarImg      = document.getElementById('avatar-img');
 var avatarInitials = document.getElementById('avatar-initials');
 if (config.photo && avatarImg) {
-avatarImg.src = config.photo;
+var photoPath = config.photo.trim().replace(/^\/?public\//, '/');
+if (!photoPath.startsWith('/') && !photoPath.startsWith('http')) photoPath = '/' + photoPath;
+avatarImg.src = photoPath;
 avatarImg.alt = name + ' — profile photo';
 avatarImg.classList.remove('hidden');
 if (avatarInitials) avatarInitials.classList.add('hidden');
