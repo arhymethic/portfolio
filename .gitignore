@@ -2,9 +2,13 @@ node_modules/
 .env
 *.log
 
-# Runtime-generated data — not committed
+# Runtime-generated data & uploads — not committed to git
 data/contacts.json
 data/vectors/
 data/avatars/
 data/models/
+data/projects/*
+!data/projects/.gitkeep
 public/avatars/
+public/images/*
+!public/images/.gitkeep
