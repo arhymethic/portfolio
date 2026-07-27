@@ -11,20 +11,46 @@ NFC business card backend. Tap the card → browser opens → visitor fills in t
 - Embeds all contacts into a local vector store for semantic search
 - Admin dashboard at `/admin` to browse, search, and annotate contacts
 
-## Setup
+## Running with Docker (recommended)
+
+Make sure Docker and Docker Compose are installed, then:
 
 ```bash
 cp .env.example .env
 # edit .env — set ADMIN_USERNAME and ADMIN_PASSWORD
+docker compose up -d
+```
+
+That's it. The first build takes a few minutes (installs Chromium, downloads the embedding model). Subsequent starts are instant.
+
+- Portfolio: `http://localhost:3000`
+- Admin: `http://localhost:3000/admin`
+
+**Useful commands:**
+
+```bash
+docker compose logs -f          # live logs
+docker compose restart          # restart after config.json changes
+docker compose down             # stop
+docker compose up -d --build    # rebuild after code changes
+```
+
+**Data** (contacts, vectors, avatars, model cache) lives in `./data/` on the host — it persists across restarts and rebuilds automatically.
+
+**Config** — edit `config.json` on the host and run `docker compose restart`. No rebuild needed.
+
+## Running without Docker
+
+```bash
+cp .env.example .env
 npm install
+npx playwright install chromium  # only needed for scraping
 npm start
 ```
 
-Open `http://localhost:3000`. Admin dashboard at `http://localhost:3000/admin`.
-
 ## Configuration
 
-Everything visible on the site lives in `config.json` — name, tagline, colours, WhatsApp number, boot screen text, all of it. Edit it and restart the server.
+Everything visible on the site lives in `config.json` — name, tagline, colours, WhatsApp number, boot screen text, all of it. Edit it and restart.
 
 Key fields:
 
@@ -56,7 +82,7 @@ Projects are in `data/projects.json`:
 ```
 ADMIN_USERNAME=   # login for /admin
 ADMIN_PASSWORD=   # use something strong
-PORT=3000         # optional
+PORT=3000         # optional, default 3000
 NODE_ENV=production
 ```
 
@@ -76,6 +102,13 @@ npm run reindex      # rebuild vector index from contacts.json
 npm run scrape-all   # re-scrape all contacts with social handles
 ```
 
+Inside Docker:
+
+```bash
+docker compose exec app node scripts/reindex.js
+docker compose exec app node scripts/scrape-all.js
+```
+
 ## Project structure
 
 ```
@@ -85,7 +118,9 @@ npm run scrape-all   # re-scrape all contacts with social handles
 ├── data/
 │   ├── contacts.json       # captured contacts (gitignored)
 │   ├── projects.json       # your projects
-│   └── vectors/            # vector index (gitignored)
+│   ├── vectors/            # vector index (gitignored)
+│   ├── avatars/            # downloaded profile pictures (gitignored)
+│   └── models/             # embedding model cache (gitignored)
 ├── lib/
 │   ├── contacts.js         # read/write contacts.json
 │   ├── embeddings.js       # local ML model (all-MiniLM-L6-v2)
@@ -109,11 +144,3 @@ npm run scrape-all   # re-scrape all contacts with social handles
         ├── index.html
         └── admin.js
 ```
-
-## Docker
-
-```bash
-docker compose up -d
-```
-
-Volumes keep contacts, vectors, and avatars on the host. Edit `config.json` on the host and it reflects immediately (no rebuild needed). Set your credentials in `.env` before starting.

@@ -1,6 +1,8 @@
 'use strict';
 
 const express     = require('express');
+const fs          = require('fs');
+const path        = require('path');
 const router      = express.Router();
 const { getConfig }   = require('../lib/config');
 const contacts        = require('../lib/contacts');
@@ -10,17 +12,15 @@ const { enrichContact } = require('../lib/scraper');
 const { captureLimiter } = require('../middleware/rateLimits');
 const validateCapture    = require('../middleware/validateCapture');
 
+const PROJECTS_PATH = path.join(__dirname, '..', 'data', 'projects.json');
+
 router.get('/config', (_req, res) => {
   const config = getConfig();
-  const fs   = require('fs');
-  const path = require('path');
 
   let projects = [];
   try {
-    const projectsPath = path.join(__dirname, '..', 'data', 'projects.json');
-    if (fs.existsSync(projectsPath)) {
-      const raw = fs.readFileSync(projectsPath, 'utf8');
-      const parsed = JSON.parse(raw);
+    if (fs.existsSync(PROJECTS_PATH)) {
+      const parsed = JSON.parse(fs.readFileSync(PROJECTS_PATH, 'utf8'));
       projects = Array.isArray(parsed) ? parsed : [];
     }
   } catch { /* return empty array */ }

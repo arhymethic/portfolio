@@ -1,7 +1,5 @@
 'use strict';
 
-require('dotenv').config();
-
 const express = require('express');
 const path    = require('path');
 const helmet  = require('helmet');
@@ -12,6 +10,8 @@ const apiRoutes       = require('./routes/api');
 const adminRoutes     = require('./routes/admin');
 const { getConfig }   = require('./lib/config');
 const { shutdown: scraperShutdown } = require('./lib/scraper');
+
+require('dotenv').config();
 
 const app = express();
 
@@ -52,6 +52,9 @@ app.use((_req, res, next) => {
   res.set('Expires', '0');
   next();
 });
+
+// Serve downloaded avatars from data/avatars/ at /avatars/
+app.use('/avatars', express.static(path.join(__dirname, 'data', 'avatars'), { etag: false, lastModified: false }));
 
 const serveStatic = express.static(path.join(__dirname, 'public'), { etag: false, lastModified: false });
 app.use((req, res, next) => {

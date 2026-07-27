@@ -7,6 +7,7 @@ const basicAuth   = require('../middleware/auth');
 const contacts    = require('../lib/contacts');
 const { embed, buildTextBlob } = require('../lib/embeddings');
 const vectorStore = require('../lib/vectorStore');
+const { enrichContact } = require('../lib/scraper');
 
 router.use(basicAuth);
 router.use(express.static(path.join(__dirname, '..', 'public', 'admin'), { etag: false, lastModified: false }));
@@ -52,9 +53,8 @@ router.post('/search', async (req, res, next) => {
 
 router.post('/enrich-all', async (req, res, next) => {
   try {
-    const all = await contacts.readAll();
+    const all      = await contacts.readAll();
     const toEnrich = all.filter(c => c.instagram || c.linkedin);
-    const { enrichContact } = require('../lib/scraper');
     for (const contact of toEnrich) {
       enrichContact(contact.id, contact.instagram, contact.linkedin);
     }
