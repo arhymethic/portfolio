@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const express = require('express');
 const path    = require('path');
 const helmet  = require('helmet');
@@ -11,7 +13,6 @@ const adminRoutes     = require('./routes/admin');
 const { getConfig }   = require('./lib/config');
 const { shutdown: scraperShutdown } = require('./lib/scraper');
 
-require('dotenv').config();
 
 const app = express();
 
