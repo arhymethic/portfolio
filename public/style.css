@@ -395,18 +395,17 @@ pre {
 
 .hero-identity {
   display: flex;
-  align-items: flex-start;
-  gap: 20px;
+  align-items: stretch;
+  gap: 18px;
 }
 
 .avatar-block {
-  width: 90px;
-  height: 90px;
-  aspect-ratio: 1 / 1;
+  flex: 0 0 110px;
+  width: 110px;
+  align-self: stretch;
   border: 2px solid var(--green);
   border-radius: 6px;
   overflow: hidden;
-  flex-shrink: 0;
   box-shadow: 0 0 16px var(--green-muted), inset 0 0 12px var(--border);
   cursor: pointer;
   transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
@@ -1150,15 +1149,14 @@ pre {
 
   .hero-identity {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 14px;
   }
 
   .avatar-block {
-    width: 76px;
-    height: 76px;
-    aspect-ratio: 1 / 1;
-    flex-shrink: 0;
+    flex: 0 0 95px;
+    width: 95px;
+    align-self: stretch;
   }
 
   .hero-name {
