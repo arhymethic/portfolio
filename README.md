@@ -1,79 +1,119 @@
-# NFC Portfolio — Layer 1
+# portfolio
 
-Personal portfolio page linked to an NFC card. Captures visitor details and routes them to WhatsApp.
+NFC business card backend. Tap the card → browser opens → visitor fills in their details → you get a WhatsApp ping. Contacts are stored locally, automatically scraped for LinkedIn/Instagram data, and indexed for semantic search.
 
-## Quick Start
+## What it does
+
+- Serves a terminal-aesthetic portfolio page
+- Collects visitor details via a form (name, email, Instagram, LinkedIn, role, where you met)
+- Fires a WhatsApp deep-link so the visitor messages you immediately
+- Scrapes their LinkedIn/Instagram in the background using Playwright
+- Embeds all contacts into a local vector store for semantic search
+- Admin dashboard at `/admin` to browse, search, and annotate contacts
+
+## Setup
 
 ```bash
+cp .env.example .env
+# edit .env — set ADMIN_USERNAME and ADMIN_PASSWORD
 npm install
-npm run dev       # starts with --watch (auto-restarts on file changes)
-# or
-npm start         # production
+npm start
 ```
 
-Runs on `http://localhost:3000` (change port in `config.json`).
+Open `http://localhost:3000`. Admin dashboard at `http://localhost:3000/admin`.
 
 ## Configuration
 
-**Edit `config.json` — this is the only file you should need to touch for content.**
+Everything visible on the site lives in `config.json` — name, tagline, colours, WhatsApp number, boot screen text, all of it. Edit it and restart the server.
 
-| Key | What it does |
+Key fields:
+
+| Field | Description |
 |---|---|
-| `name` | Your name — shown in nav, hero, page title |
-| `initials` | Single letter for the avatar circle when no photo is set |
+| `name` | Your name |
 | `tagline` | One-liner under your name |
-| `photo` | Path relative to `/public`, e.g. `images/me.jpg`. Leave `""` for initials avatar. |
-| `whatsapp.number` | Your number — country code + digits, no `+` or spaces |
-| `whatsapp.message` | The pre-written message the visitor sends you |
-| `projects[]` | Array of `{ title, description, url, tags[] }` |
-| `socials` | `{ linkedin, github, twitter, email }` — leave blank to hide |
-| `meta.title` | Browser tab title |
-| `meta.description` | SEO meta description |
-| `server.port` | Port to listen on (default 3000) |
+| `whatsapp.number` | Country code + number, no spaces (e.g. `917000000000`) |
+| `whatsapp.message` | Pre-filled message the visitor sends you |
+| `socials` | LinkedIn, GitHub, Twitter, email — leave blank to hide |
+| `theme.colors` | All CSS variables — change the colour scheme here |
+| `photo` | Path relative to `/public`, e.g. `images/me.jpg` |
 
-## File Structure
+Projects are in `data/projects.json`:
 
-```
-/
-├── config.json          ← All variables live here
-├── server.js            ← Express: serves static files + /api/* routes
-├── package.json
-├── data/
-│   └── contacts.json    ← Captures appended here automatically
-└── public/
-    ├── index.html
-    ├── style.css
-    └── main.js
+```json
+[
+  {
+    "title": "Project Name",
+    "description": "What it does.",
+    "url": "https://github.com/you/project",
+    "tags": ["tag1", "tag2"]
+  }
+]
 ```
 
-## API Endpoints
+## Environment variables
 
-| Endpoint | Method | Description |
-|---|---|---|
-| `/api/config` | GET | Returns non-sensitive config to the frontend |
-| `/api/capture` | POST | Saves a contact, returns the WhatsApp URL |
-| `/api/contacts` | GET | Lists all captured contacts (internal use) |
+```
+ADMIN_USERNAME=   # login for /admin
+ADMIN_PASSWORD=   # use something strong
+PORT=3000         # optional
+NODE_ENV=production
+```
 
-## Captured Fields
+## Admin dashboard
 
-Every form submission saves:
-- `id`, `timestamp`
-- `name`, `email`, `company`, `linkedin`, `role`, `whereMet`
+Go to `/admin` and log in with the credentials from your `.env`.
 
-## Running as a Service (home server)
+- **Contacts table** — all captured visitors, sortable and filterable
+- **Semantic search** — find contacts by describing them in plain English (runs a local embedding model)
+- **Contact detail panel** — full enriched profile, notes field, delete button
+- **Enrich All** — triggers background scraping for all contacts that have social handles
+
+## Scripts
 
 ```bash
-# With PM2
-npm install -g pm2
-pm2 start server.js --name portfolio
-pm2 save
-pm2 startup
+npm run reindex      # rebuild vector index from contacts.json
+npm run scrape-all   # re-scrape all contacts with social handles
 ```
 
-## Next Layers
+## Project structure
 
-| Layer | Description |
-|---|---|
-| 3 | WhatsApp deep-link (already wired via config) |
-| 4 | Auto-enrich contacts using Clay / Apollo / n8n |
-| 5 | Searchable memory — Notion AI / custom RAG over contacts.json |
+```
+├── server.js
+├── config.json
+├── .env
+├── data/
+│   ├── contacts.json       # captured contacts (gitignored)
+│   ├── projects.json       # your projects
+│   └── vectors/            # vector index (gitignored)
+├── lib/
+│   ├── contacts.js         # read/write contacts.json
+│   ├── embeddings.js       # local ML model (all-MiniLM-L6-v2)
+│   ├── scraper.js          # Playwright scraper for LinkedIn + Instagram
+│   └── vectorStore.js      # vectra wrapper
+├── middleware/
+│   ├── auth.js             # HTTP Basic Auth
+│   ├── rateLimits.js
+│   └── validateCapture.js
+├── routes/
+│   ├── api.js              # /api/config, /api/capture
+│   └── admin.js            # /admin/* (auth-protected)
+├── scripts/
+│   ├── reindex.js
+│   └── scrape-all.js
+└── public/
+    ├── index.html
+    ├── main.js
+    ├── style.css
+    └── admin/
+        ├── index.html
+        └── admin.js
+```
+
+## Docker
+
+```bash
+docker compose up -d
+```
+
+Volumes keep contacts, vectors, and avatars on the host. Edit `config.json` on the host and it reflects immediately (no rebuild needed). Set your credentials in `.env` before starting.
