@@ -234,16 +234,16 @@ color: var(--text-dim);
 .hero-identity {
 display: flex;
 align-items: center;
-gap: 24px;
+gap: 16px;
 }
 .avatar-block {
-width: 80px;
-height: 80px;
-border: 2px solid var(--green);
-border-radius: 6px;
+width: 58px;
+height: 58px;
+border: 1.5px solid var(--green);
+border-radius: 4px;
 overflow: hidden;
 flex-shrink: 0;
-box-shadow: 0 0 20px var(--green-muted), inset 0 0 20px var(--border);
+box-shadow: 0 0 12px var(--green-muted), inset 0 0 10px var(--border);
 }
 .avatar-img {
 width: 100%;
@@ -256,10 +256,10 @@ height: 100%;
 display: flex;
 align-items: center;
 justify-content: center;
-font-size: 2rem;
-font-weight: 800;
+font-size: 1.3rem;
+font-weight: 700;
 color: var(--green);
-text-shadow: var(--glow-md);
+text-shadow: var(--glow-sm);
 background: var(--bg-surface);
 }
 .hero-text {
