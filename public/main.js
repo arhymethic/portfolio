@@ -402,10 +402,9 @@ if (errorEl) errorEl.classList.add('hidden');
 var _lb = null;
 var _lbImages = [];
 var _lbIdx = 0;
-function openLightbox(images, startIdx) {
-_lbImages = images;
-_lbIdx = startIdx || 0;
-if (!_lb) {
+
+function initLightbox() {
+if (_lb) return;
 _lb = document.createElement('div');
 _lb.className = 'lb-overlay';
 _lb.hidden = true;
@@ -420,11 +419,12 @@ _lb.innerHTML =
 '</div>' +
 '<div class="lb-body">' +
 '<button class="lb-nav" id="lb-prev" aria-label="Previous image">‹</button>' +
-'<img class="lb-img" id="lb-img" alt="" />' +
+'<img class="lb-img" id="lb-img" alt="" decoding="async" />' +
 '<button class="lb-nav" id="lb-next" aria-label="Next image">›</button>' +
 '</div>' +
 '</div>';
 document.body.appendChild(_lb);
+
 _lb.querySelector('#lb-close').addEventListener('click', closeLightbox);
 _lb.querySelector('#lb-prev').addEventListener('click', function() { _lbIdx = (_lbIdx - 1 + _lbImages.length) % _lbImages.length; updateLightbox(); });
 _lb.querySelector('#lb-next').addEventListener('click', function() { _lbIdx = (_lbIdx + 1) % _lbImages.length; updateLightbox(); });
@@ -436,20 +436,28 @@ if (e.key === 'ArrowLeft')  { _lbIdx = (_lbIdx - 1 + _lbImages.length) % _lbImag
 if (e.key === 'ArrowRight') { _lbIdx = (_lbIdx + 1) % _lbImages.length; updateLightbox(); }
 });
 }
+
+function openLightbox(images, startIdx) {
+initLightbox();
+_lbImages = images;
+_lbIdx = startIdx || 0;
 updateLightbox();
 _lb.hidden = false;
-_lb.getBoundingClientRect();
-_lb.classList.add('is-open');
 document.body.style.overflow = 'hidden';
-document.getElementById('lb-close').focus();
+requestAnimationFrame(function() {
+_lb.classList.add('is-open');
+var closeBtn = document.getElementById('lb-close');
+if (closeBtn) closeBtn.focus();
+});
 }
+
 function closeLightbox() {
 if (!_lb) return;
 _lb.classList.remove('is-open');
-_lb.addEventListener('transitionend', function() {
+setTimeout(function() {
 _lb.hidden = true;
 document.body.style.overflow = '';
-}, { once: true });
+}, 120);
 }
 function updateLightbox() {
 var imgEl   = document.getElementById('lb-img');

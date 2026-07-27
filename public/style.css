@@ -694,13 +694,14 @@ pre {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.92);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 16px;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  will-change: opacity;
+  transition: opacity 0.12s ease-out;
 }
 
 .lb-overlay[hidden] {
@@ -721,12 +722,13 @@ pre {
   flex-direction: column;
   border-radius: 4px;
   overflow: hidden;
-  transform: scale(0.96);
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.97) translateZ(0);
+  will-change: transform;
+  transition: transform 0.12s ease-out;
 }
 
 .lb-overlay.is-open .lb-panel {
-  transform: scale(1);
+  transform: scale(1) translateZ(0);
 }
 
 .lb-titlebar {
