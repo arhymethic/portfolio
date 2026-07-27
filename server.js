@@ -57,6 +57,9 @@ app.use((_req, res, next) => {
 // Serve downloaded avatars from data/avatars/ at /avatars/
 app.use('/avatars', express.static(path.join(__dirname, 'data', 'avatars'), { etag: false, lastModified: false }));
 
+// Serve project showcase images from data/projects/ at /project-images/
+app.use('/project-images', express.static(path.join(__dirname, 'data', 'projects'), { etag: false, lastModified: false }));
+
 const serveStatic = express.static(path.join(__dirname, 'public'), { etag: false, lastModified: false });
 app.use((req, res, next) => {
   if (req.path.toLowerCase() === '/admin') return res.redirect(301, '/admin/');

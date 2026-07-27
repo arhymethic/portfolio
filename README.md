@@ -69,13 +69,16 @@ Projects are in `data/projects.json`:
 ```json
 [
   {
-    "title": "Project Name",
+    "title": "Wall-Mounted Home Server",
     "description": "What it does.",
     "url": "https://github.com/you/project",
-    "tags": ["tag1", "tag2"]
+    "tags": ["Linux", "Hardware"],
+    "images": ["/project-images/server1.jpg", "/project-images/server2.jpg"]
   }
 ]
 ```
+
+Place project showcase images in `data/projects/` — they will automatically be served at `/project-images/<filename>`. Clicking any image thumbnail on a project card opens a full terminal-styled lightbox viewer with arrow navigation.
 
 ## Environment variables
 
