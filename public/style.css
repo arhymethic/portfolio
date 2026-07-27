@@ -663,13 +663,6 @@ pre {
   overflow-x: auto;
 }
 
-gap: 8px;
-padding: 8px 12px;
-background: var(--bg-titlebar);
-border-top: 1px solid var(--border);
-overflow-x: auto;
-}
-
 .project-strip-thumb {
   width: 48px;
   height: 34px;

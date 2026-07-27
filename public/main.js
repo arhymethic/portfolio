@@ -77,6 +77,7 @@ var photoPath = (config.photo || 'images/profile.jpg').trim().replace(/^\/?publi
 if (!photoPath.startsWith('/') && !photoPath.startsWith('http')) photoPath = '/' + photoPath;
 avatarImg.src = photoPath;
 avatarImg.alt = name + ' — profile photo';
+avatarImg.classList.remove('hidden');
 }
 setText('hero-name', name.toLowerCase());
 var taglineEl = document.getElementById('tagline-text');
