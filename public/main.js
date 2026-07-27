@@ -71,17 +71,12 @@ var cmd  = heroUi.command     || 'whoami';
 var flag = heroUi.commandFlag || '--verbose';
 heroCmd.innerHTML = safeText(cmd) + ' <span class="cmd-flag">' + safeText(flag) + '</span>';
 }
-var avatarImg      = document.getElementById('avatar-img');
-var avatarInitials = document.getElementById('avatar-initials');
-if (config.photo && avatarImg) {
-var photoPath = config.photo.trim().replace(/^\/?public\//, '/');
+var avatarImg = document.getElementById('avatar-img');
+if (avatarImg) {
+var photoPath = (config.photo || 'images/profile.jpg').trim().replace(/^\/?public\//, '/');
 if (!photoPath.startsWith('/') && !photoPath.startsWith('http')) photoPath = '/' + photoPath;
 avatarImg.src = photoPath;
 avatarImg.alt = name + ' — profile photo';
-avatarImg.classList.remove('hidden');
-if (avatarInitials) avatarInitials.classList.add('hidden');
-} else if (avatarInitials) {
-avatarInitials.textContent = config.initials || name.charAt(0).toUpperCase();
 }
 setText('hero-name', name.toLowerCase());
 var taglineEl = document.getElementById('tagline-text');
