@@ -378,15 +378,35 @@ transition: color 0.15s, transform 0.15s;
 color: var(--green);
 transform: translateX(3px);
 }
+/* Side-by-side project split body */
+.project-split-body {
+display: flex;
+gap: 16px;
+align-items: flex-start;
+margin-top: 6px;
+}
+.project-split-left {
+flex: 0 0 190px;
+width: 190px;
+}
+.project-split-right {
+flex: 1;
+min-width: 0;
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
 /* Static CRT Project Media Frame */
 .project-frame {
 background: var(--bg-surface);
 border: 1px solid var(--border-bright);
 border-radius: 4px;
-margin: 12px 0 14px;
+margin: 0;
 overflow: hidden;
 cursor: pointer;
 transition: border-color 0.2s, box-shadow 0.2s;
+width: 100%;
 }
 .project-frame:hover {
 border-color: var(--green);
@@ -395,11 +415,11 @@ box-shadow: var(--glow-sm);
 .project-frame-bar {
 background: var(--bg-titlebar);
 border-bottom: 1px solid var(--border);
-padding: 6px 12px;
+padding: 5px 8px;
 display: flex;
 align-items: center;
 justify-content: space-between;
-font-size: 0.68rem;
+font-size: 0.65rem;
 font-family: var(--font);
 }
 .project-frame-tag {
@@ -409,7 +429,7 @@ letter-spacing: 0.05em;
 }
 .project-frame-zoom {
 color: var(--text-comment);
-font-size: 0.65rem;
+font-size: 0.6rem;
 transition: color 0.15s;
 }
 .project-frame:hover .project-frame-zoom {
@@ -418,7 +438,8 @@ color: var(--green);
 .project-frame-viewport {
 position: relative;
 width: 100%;
-max-height: 280px;
+height: 130px;
+max-height: 130px;
 background: #050508;
 display: flex;
 align-items: center;
@@ -427,17 +448,23 @@ overflow: hidden;
 }
 .project-frame-img {
 width: 100%;
-max-height: 280px;
+height: 100%;
 object-fit: cover;
 filter: brightness(0.95) contrast(1.05);
 transition: transform 0.3s ease, filter 0.3s ease;
 }
 .project-frame:hover .project-frame-img {
-transform: scale(1.02);
+transform: scale(1.03);
 filter: brightness(1.05);
 }
 .project-frame-strip {
 display: flex;
+gap: 6px;
+padding: 6px 8px;
+background: var(--bg-titlebar);
+border-top: 1px solid var(--border);
+overflow-x: auto;
+}
 gap: 8px;
 padding: 8px 12px;
 background: var(--bg-titlebar);
@@ -829,6 +856,18 @@ font-size: 2rem;
 }
 .project-card {
 padding: 14px 16px;
+}
+.project-split-body {
+flex-direction: column;
+gap: 12px;
+}
+.project-split-left {
+width: 100%;
+flex: 1;
+}
+.project-frame-viewport {
+height: 180px;
+max-height: 180px;
 }
 .project-perms {
 display: none;

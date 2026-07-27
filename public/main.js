@@ -128,12 +128,12 @@ var card = document.createElement('div');
 card.className = 'project-card';
 card.setAttribute('tabindex', '0');
 
-var frameHtml = '';
+var bodyHtml = '';
 if (projImages.length > 0) {
-frameHtml =
+var frameHtml =
 '<div class="project-frame">' +
 '<div class="project-frame-bar">' +
-'<span class="project-frame-tag">[STATIC_FRAME: MEDIA_ATTACHMENT]</span>' +
+'<span class="project-frame-tag">[FRAME]</span>' +
 '<span class="project-frame-zoom">⛶ EXPAND</span>' +
 '</div>' +
 '<div class="project-frame-viewport">' +
@@ -141,6 +141,19 @@ frameHtml =
 '</div>' +
 (projImages.length > 1 ? '<div class="project-frame-strip"></div>' : '') +
 '</div>';
+
+bodyHtml =
+'<div class="project-split-body">' +
+'<div class="project-split-left">' + frameHtml + '</div>' +
+'<div class="project-split-right">' +
+'<div class="project-desc">' + safeText(project.description) + '</div>' +
+(tagsHtml ? '<div class="project-tags">' + tagsHtml + '</div>' : '') +
+'</div>' +
+'</div>';
+} else {
+bodyHtml =
+'<div class="project-desc">' + safeText(project.description) + '</div>' +
+(tagsHtml ? '<div class="project-tags">' + tagsHtml + '</div>' : '');
 }
 
 card.innerHTML =
@@ -148,9 +161,7 @@ card.innerHTML =
 '<span class="project-perms">' + safeText(perms) + '</span>' +
 '<span class="project-name">' + safeText(slug) + '/</span>' +
 '</div>' +
-frameHtml +
-'<div class="project-desc">' + safeText(project.description) + '</div>' +
-(tagsHtml ? '<div class="project-tags">' + tagsHtml + '</div>' : '') +
+bodyHtml +
 '<span class="project-arrow">' + safeText(arrow) + '</span>';
 
 if (projImages.length > 0) {
