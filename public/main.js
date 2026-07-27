@@ -81,7 +81,7 @@ if (avatarInitials) avatarInitials.classList.add('hidden');
 } else if (avatarInitials) {
 avatarInitials.textContent = config.initials || name.charAt(0).toUpperCase();
 }
-setText('hero-name', name.toUpperCase());
+setText('hero-name', name.toLowerCase());
 var taglineEl = document.getElementById('tagline-text');
 if (taglineEl && config.tagline) {
 await sleep(400);
