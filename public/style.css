@@ -1148,22 +1148,21 @@ pre {
   }
 
   .hero-identity {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
   }
 
   .avatar-block {
-    width: 64px;
-    height: 64px;
-  }
-
-  .avatar-initials {
-    font-size: 1.5rem;
+    width: 72px;
+    height: 72px;
+    min-height: 72px;
+    flex-shrink: 0;
+    align-self: flex-start;
   }
 
   .hero-name {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
 
   .project-card {
